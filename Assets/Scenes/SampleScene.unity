@@ -1724,7 +1724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a92f0a4dcf1d14ab867888eb685186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SP_CameraController
-  _mouseSens: 6
+  _mouseSens: 24
 --- !u!4 &935313242 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2647661461800831737, guid: ae4abcab6cab20f49bf298d1ffe353a8, type: 3}

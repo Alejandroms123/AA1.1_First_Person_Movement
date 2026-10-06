@@ -99,7 +99,6 @@ public class SP_PlayerController : MonoBehaviour
         Vector2 moveInput = _moveInput.ReadValue<Vector2>();
         Vector3 moveDir = transform.right * moveInput.x + transform.forward * moveInput.y;
         moveDir.y = 0f;
-        moveDir = Vector3.ClampMagnitude(moveDir, 1f);
 
         ChangeSpeed(moveInput);
         Move(moveDir);
@@ -109,7 +108,7 @@ public class SP_PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         Vector3 origin = _col.bounds.center;
-        float distance = _col.bounds.extents.y + 0.1f;
+        float distance = _col.bounds.extents.y + 0.25f;
 
         return Physics.Raycast(origin, Vector3.down, distance, _groundLayer);
     }
@@ -140,7 +139,8 @@ public class SP_PlayerController : MonoBehaviour
     private void Move(Vector3 moveDir)
     {
         Vector3 targetVel = moveDir * _speed;
-        Vector3 currentVel = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
+        Vector3 currentVel = _rb.linearVelocity;
+        currentVel.y = 0f;
         Vector3 velocityDif = targetVel - currentVel;
         _rb.AddForce(velocityDif, ForceMode.VelocityChange);
     }
@@ -192,8 +192,6 @@ public class SP_PlayerController : MonoBehaviour
         Vector3 localVelocity = transform.InverseTransformDirection(_rb.linearVelocity);
         float velocityX = Mathf.Round(localVelocity.x);
         float velocityZ = Mathf.Round(localVelocity.z);
-        velocityX = Mathf.Clamp(velocityX, -1f, 1f);
-        velocityZ = Mathf.Clamp(velocityZ, -1f, 1f);
 
         _anim.SetFloat("VelocityX", velocityX);
         _anim.SetFloat("VelocityZ", velocityZ);

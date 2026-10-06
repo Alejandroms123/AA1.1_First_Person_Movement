@@ -20,7 +20,8 @@ public class SP_Pickable : MonoBehaviour
             return;
 
         Vector3 dir = _holdPoint.position - _rb.position;
-        Vector3 force = dir * _acceleration - _rb.linearVelocity * _deceleration; _rb.AddForce(force, ForceMode.VelocityChange);
+        Vector3 force = dir * _acceleration - _rb.linearVelocity * _deceleration;
+        _rb.AddForce(force, ForceMode.VelocityChange);
     }
 
     public void Interact(Transform holdPoint)
@@ -37,7 +38,6 @@ public class SP_Pickable : MonoBehaviour
     public void Drop()
     {
         _holdPoint = null;
-        _rb.freezeRotation = false;
         _rb.useGravity = true;
     }
 }
